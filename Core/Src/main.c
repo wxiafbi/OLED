@@ -28,6 +28,7 @@
 #include "ath10.h"
 #include "oled.h"
 #include "cat1.h"
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -124,6 +125,9 @@ int main(void)
     HAL_Delay(1000);     //延时1�?
     OLED_display_info(); //显示信息
     CAT1_Reset(30);
+    memset(u3_rxbuffer, 0x00, sizeof(u3_rxbuffer));
+    HAL_Delay(1000);
+    HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }

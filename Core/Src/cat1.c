@@ -5,7 +5,7 @@
 char CAT1_Reset(int timeout)
 {
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_SET);
-    HAL_Delay(500);
+    HAL_Delay(600);
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
 
     while (timeout--)
@@ -17,8 +17,10 @@ char CAT1_Reset(int timeout)
         printf("%d\t\n", timeout);
     }
     printf("重启成功\r\n");
-    memset(u3_rxbuffer,0x00,sizeof(u3_rxbuffer));
     if (timeout <= 0)
-        return 1; 
-    return 0;    
+    {
+        printf("重启失败\r\n");
+        return 1;
+    }
+    return 0;
 }
