@@ -125,7 +125,7 @@ int main(void)
     HAL_Delay(1000);     //延时1�?
     OLED_display_info(); //显示信息
     CAT1_Reset(30);
-    memset(u3_rxbuffer, 0x00, sizeof(u3_rxbuffer));
+    memset(u3_rxbuffer, 0x00, 1024);
     HAL_Delay(1000);
     HAL_Delay(1000);
   }

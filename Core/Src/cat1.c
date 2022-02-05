@@ -4,6 +4,7 @@
 
 char CAT1_Reset(int timeout)
 {
+    
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_SET);
     HAL_Delay(600);
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
