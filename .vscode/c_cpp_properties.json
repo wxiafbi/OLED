@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "win32",
+            "configurationProvider": "cl.eide",
+            "compilerPath": "F:/Mingw-w64/Mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [
+                "STM32F103xB",
+                "STM32F10X_MD",
+                "USE_HAL_DRIVER"
+            ],
+            "cStandard": "c99",
+            "cppStandard": "c++20"
+        }
+    ],
+    "version": 4
+}
