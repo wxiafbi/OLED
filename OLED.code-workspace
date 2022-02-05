@@ -14,7 +14,8 @@
             "editor.tabSize": 4,
             "editor.autoIndent": "advanced"
         },
-        "commentTranslate.source": "Baidu"
+        "commentTranslate.source": "Baidu",
+        "commentTranslate.hover.enabled": true
     },
     "extensions": {
         "recommendations": [
