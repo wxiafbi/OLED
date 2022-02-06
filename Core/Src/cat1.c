@@ -43,10 +43,10 @@ char CAT1_ExitTrans(int timeout)
     // uint8_t k[] = {'+', '+', '+'};
     //  CAT1_RxCounter=0;                         //接收数据量变量清零
     u3_count = 0;
-    memset(u3_rxbuffer, 0, u3_rxsize); //清空接收缓冲区
+    memset(u3_rxbuffer, 0x00, u3_rxsize); //清空接收缓冲区
     // CAT1_printf("+++");                //发送指令
     HAL_UART_Transmit(&huart3, (uint8_t *)"+++", 3, 0xfff);
-    HAL_UART_Transmit(&huart1, (uint8_t *)"+++\r\n", 3, 0xfff);
+    HAL_UART_Transmit(&huart1, (uint8_t *)"+++\r\n", sizeof("+++"), 0xfff);
     while (timeout--)
     {                                 //等待超时时间到0
         HAL_Delay(100);               //延时100ms
@@ -57,7 +57,7 @@ char CAT1_ExitTrans(int timeout)
         }
         printf("%d ", timeout); //串口输出现在的超时时间
     }
-    printf("111111\r\n"); //串口输出信息
+    //printf("111111\r\n"); //串口输出信息
     if (timeout <= 0)
     {
         HAL_UART_Transmit(&huart1, (uint8_t *)"没有收到a\r\n", 8, 0xfff);
@@ -68,9 +68,9 @@ char CAT1_ExitTrans(int timeout)
         // CAT1_RxCounter = 0;                       //接收数据量变量清零
         HAL_UART_Transmit(&huart1, (uint8_t *)"进入else分支\r\n", 12, 0xfff);
         u3_count = 0;
-        memset(u3_rxbuffer, 0, u3_rxsize); //清空接收缓冲区
+        memset(u3_rxbuffer, 0x00, u3_rxsize); //清空接收缓冲区
         // CAT1_printf("a");                         //发送指令
-        HAL_UART_Transmit(&huart3, "a", 1, 0xfff);
+        HAL_UART_Transmit(&huart3, (uint8_t *)"a", 1, 0xfff);
         while (timeout--)
         {                                   //等待超时时间到0
             HAL_Delay(100);                 //延时100ms
@@ -85,6 +85,7 @@ char CAT1_ExitTrans(int timeout)
         if (timeout <= 0)
             return 2; //如果timeout<=0，说明超时时间到了，也没能收到+ok，返回1
     }
+    printf("退出透传模式成功\r\n");
     return 0; //正确 返回0
 }
 /*-------------------------------------------------*/
@@ -96,7 +97,7 @@ char CAT1_ExitTrans(int timeout)
 char CAT1_SendCmd(char *cmd, int timeout)
 {
     u3_count = 0;                      // CAT1接收数据量变量清零
-    memset(u3_rxbuffer, 0, u3_rxsize); //清空CAT1接收缓冲区
+    memset(u3_rxbuffer, 0x00, u3_rxsize); //清空CAT1接收缓冲区
     // CAT1_printf("%s\r\n",cmd);                  //发送指令
     HAL_UART_Transmit(&huart3, (uint8_t *)cmd, sizeof(cmd), 0xfff);
     while (timeout--)
@@ -119,12 +120,14 @@ char CAT1_SendCmd(char *cmd, int timeout)
 /*-------------------------------------------------*/
 char CAT1_CSQ(int timeout)
 {
-    char temp[20] = {0};
-    char csq[20] = {0};
+    char temp[20];
+    char csq[20];
+
+    printf("进入查询信号强度\r\n");
     u3_count = 0;                      // CAT1接收数据量变量清零
-    memset(u3_rxbuffer, 0, u3_rxsize); //清空CAT1接收缓冲区
+    memset(u3_rxbuffer, 0x00, u3_rxsize); //清空CAT1接收缓冲区
     // CAT1_printf("usr.cn#AT+CSQ\r\n");  //发送指令
-    HAL_UART_Transmit(&huart3, (uint8_t *)"usr.cn#AT+CSQ\r\n", sizeof("usr.cn#AT+CSQ\r\n"), 0xfff);
+    HAL_UART_Transmit(&huart3, (uint8_t *)"AT+CSQ\r\n", 8, 0xfff);
     // CAT1_SendCmd("AT+CSQ\r\n",timeout);
     while (timeout--)
     {                                 //等待超时时间到0
@@ -142,7 +145,7 @@ char CAT1_CSQ(int timeout)
         sscanf(u3_rxbuffer, "%[^:]:%[^,],%[^,],%[^\r]", temp, csq, temp, temp); //拆分数据
         printf("信号强度:%s\r\n", csq);                                         //串口显示信息
         // OLED_Clear();
-        OLED_ShowString(0, 42, (uint8_t *)csq);
+        OLED_ShowString(81, 0, (uint8_t *)csq);
     }
     return 0; //正确 返回0
 }
@@ -157,8 +160,9 @@ char CAT1_SYSINFO(int timeout)
     char info[20];
 
     u3_count = 0;                      // CAT1接收数据量变量清零
-    memset(u3_rxbuffer, 0, u3_rxsize); //清空CAT1接收缓冲区
-    printf("AT+SYSINFO\r\n");          //发送指令
+    memset(u3_rxbuffer, 0x00, u3_rxsize); //清空CAT1接收缓冲区
+    //printf("AT+SYSINFO\r\n");          //发送指令
+    HAL_UART_Transmit(&huart3, (uint8_t *)"AT+SYSINFO\r\n", 12, 0xfff);
     while (timeout--)
     {                                 //等待超时时间到0
         HAL_Delay(100);                //延时100ms
