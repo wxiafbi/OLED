@@ -129,6 +129,7 @@ int main(void)
     CAT1_ExitTrans(30);
     HAL_Delay(1000);
     CAT1_CSQ(30);
+    HAL_Delay(1000);
     CAT1_SYSINFO(30);
     HAL_Delay(1000);
   }

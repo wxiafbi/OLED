@@ -90,23 +90,15 @@ void AHT10_Data(double *temp, double *humi)
     HAL_Delay(5); //ясЁы
 
     tdata = (tdata | Redata[1]) << 8;
-    printf("%d,%d\r\n",tdata,Redata[1]);
     tdata = (tdata | Redata[2]) << 8;
-    printf("%d,%d\r\n",tdata,Redata[2]);
     tdata = (tdata | Redata[3]);
-    printf("%d,%d\r\n",tdata,Redata[3]);
     tdata = (tdata >> 4);
-    printf("%d\r\n\r\n",tdata);
     *humi = tdata * 100.0 / 1024.0 / 1024.0;
 
     tdata = 0;
     tdata = (tdata | Redata[3]) << 8;
-    printf("%d,%d\r\n",tdata,Redata[3]);
     tdata = (tdata | Redata[4]) << 8;
-    printf("%d,%d\r\n",tdata,Redata[4]);
     tdata = (tdata | Redata[5]);
-    printf("%d,%d\r\n",tdata,Redata[5]);
     tdata = tdata & 0xfffff;
-    printf("%d\r\n",tdata);
     *temp = tdata * 200.0 / 1024.0 / 1024.0 - 50.0;
 }

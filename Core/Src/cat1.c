@@ -153,27 +153,26 @@ char CAT1_CSQ(int timeout)
 /*-------------------------------------------------*/
 char CAT1_SYSINFO(int timeout)
 {
-    char temp[20] = {0};
-    char info[20] = {0};
+    char temp[20];
+    char info[20];
 
     u3_count = 0;                      // CAT1接收数据量变量清零
     memset(u3_rxbuffer, 0, u3_rxsize); //清空CAT1接收缓冲区
-    // CAT1_printf("AT+SYSINFO\r\n");
-    HAL_UART_Transmit(&huart3, (uint8_t *)"AT+SYSINFO\r\n", sizeof("AT+SYSINFO\r\n"), 0xfff);
+    printf("AT+SYSINFO\r\n");          //发送指令
     while (timeout--)
-    {
-        HAL_Delay(100);
-        if (strstr(u3_rxbuffer, ","))
-            break;
-        printf("%d ", timeout);
-        printf("\r\n");
-        if (timeout <= 0)
-            return 1;
-        else
-        {
-            sscanf(u3_rxbuffer, "%[^:]:%[^,],%[^\r]", temp, temp, info);
-            printf("当前网络形式:%d\r\n", info);
-        }
+    {                                 //等待超时时间到0
+        HAL_Delay(100);                //延时100ms
+        if (strstr(u3_rxbuffer, ",")) //如果接收到,表示指令成功
+            break;                    //主动跳出while循环
+        printf("%d ", timeout);    //串口输出现在的超时时间
     }
-    return 0;
+    printf("\r\n"); //串口输出信息
+    if (timeout <= 0)
+        return 1; //如果timeout<=0，说明超时时间到了，也没能收到,返回1
+    else
+    {
+        sscanf(u3_rxbuffer, "%[^:]:%[^,],%[^\r]", temp, temp, info); //拆分数据
+        printf("当前网络形式:%s\r\n", info);                         //串口显示信息
+    }
+    return 0; //正确 返回0
 }
