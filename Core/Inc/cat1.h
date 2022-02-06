@@ -42,6 +42,7 @@ extern "C" {
 
 /* USER CODE BEGIN Prototypes */
 char CAT1_Reset(int timeout);
+char CAT1_ExitTrans(int timeout);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

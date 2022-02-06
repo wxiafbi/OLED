@@ -293,14 +293,15 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   if (huart->Instance == USART3)
   {
     u3_rxbuffer[u3_count++] = u3_rx;
-    if (HAL_UART_GetState(&huart3)!=HAL_UART_STATE_BUSY_RX)
-    {
-      printf("接收完成\r\n");
-      000000111
-      //u3_count = 0;
-    }
+    // if (HAL_UART_GetState(&huart3)!=HAL_UART_STATE_BUSY_RX)
+    // {
+    //   printf("接收完成\r\n");
+      
+    //   //u3_count = 0;
+    // }
   }
 
   HAL_UART_Receive_IT(&huart3, (uint8_t *)&u3_rx, 1);
+  
 }
 /* USER CODE END 1 */
