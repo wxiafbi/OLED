@@ -381,3 +381,123 @@ Finished: 1 information, 0 warning and 1 error messages.
 [2022-02-06 11:55:19]	[done]
 	build successfully !
 
+[2022-02-06 12:08:40]	[done]
+	build successfully !
+
+[2022-02-06 12:22:47]	[done]
+	build successfully !
+
+[2022-02-06 12:26:18]	[done]
+	build successfully !
+
+[2022-02-06 12:27:52]	[done]
+	build successfully !
+
+[2022-02-06 12:30:23]	[done]
+	build successfully !
+
+[2022-02-06 12:31:36]	[done]
+	build successfully !
+
+[2022-02-06 12:31:53]	[done]
+	build successfully !
+
+[2022-02-06 12:32:58]	[done]
+	build successfully !
+
+[2022-02-06 12:36:19]	[done]
+	build successfully !
+
+[2022-02-06 12:42:09]	[done]
+	build successfully !
+
+[2022-02-06 12:45:16]	[done]
+	build successfully !
+
+[2022-02-06 12:49:19]	[done]
+	build successfully !
+
+[2022-02-06 12:50:17]	[done]
+	build successfully !
+
+[2022-02-06 12:52:25]	[done]
+	build successfully !
+
+[2022-02-06 13:03:33]	link failed !, exit code: 1
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+Error: L6218E: Undefined symbol Delay_Ms (referred from cat1.o).
+Error: L6218E: Undefined symbol u1_printf (referred from cat1.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 2 error messages.
+
+
+[2022-02-06 13:05:45]	[done]
+	build successfully !
+
+[2022-02-06 13:06:39]	[done]
+	build successfully !
+
+[2022-02-06 13:08:55]	[done]
+	build successfully !
+
+[2022-02-06 13:27:29]	compilation failed at : "f:\LIJING\OLED-1\Core\Src\cat1.c", exit code: 1
+  at unify_builder.Program.compileByMulThread (System.Int32 thrNum, unify_builder.CmdGenerator+CmdInfo[] cmds, System.Collections.Generic.List`1[T] errLogs) [0x00104] in <67d11e1b30504dd6babd321425698ba1>:0 
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+".\Core\Src\cat1.c", line 146: Error:  #20: identifier "csq" is undefined
+          sscanf(u3_rxbuffer, "%[^:]:%[^,],%[^,],%[^\r]", temp, csq, temp, temp); //拆分数据
+                                                                ^
+".\Core\Src\cat1.c", line 149: Warning:  #223-D: function "OLED_ShowString" declared implicitly
+          OLED_ShowString(0, 0, csq);
+          ^
+.\Core\Src\cat1.c: 1 warning, 1 error
+
+[2022-02-06 13:29:56]	compilation failed at : "f:\LIJING\OLED-1\Core\Src\cat1.c", exit code: 1
+  at unify_builder.Program.compileByMulThread (System.Int32 thrNum, unify_builder.CmdGenerator+CmdInfo[] cmds, System.Collections.Generic.List`1[T] errLogs) [0x00104] in <67d11e1b30504dd6babd321425698ba1>:0 
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+".\Core\Src\cat1.c", line 4: Error:  #5: cannot open source input file "ole.h": No such file or directory
+  #include "ole.h"
+                  ^
+.\Core\Src\cat1.c: 0 warnings, 1 error
+
+[2022-02-06 13:37:09]	compilation failed at : "f:\LIJING\OLED-1\Core\Src\cat1.c", exit code: 1
+  at unify_builder.Program.compileByMulThread (System.Int32 thrNum, unify_builder.CmdGenerator+CmdInfo[] cmds, System.Collections.Generic.List`1[T] errLogs) [0x00104] in <67d11e1b30504dd6babd321425698ba1>:0 
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+".\Core\Src\cat1.c", line 142: Error:  #20: identifier "csq" is undefined
+          sscanf(u3_rxbuffer, "%[^:]:%[^,],%[^,],%[^\r]", temp, csq, temp, temp); //拆分数据
+                                                                ^
+.\Core\Src\cat1.c: 0 warnings, 1 error
+
+[2022-02-06 13:38:49]	compilation failed at : "f:\LIJING\OLED-1\Core\Src\cat1.c", exit code: 1
+  at unify_builder.Program.compileByMulThread (System.Int32 thrNum, unify_builder.CmdGenerator+CmdInfo[] cmds, System.Collections.Generic.List`1[T] errLogs) [0x00104] in <67d11e1b30504dd6babd321425698ba1>:0 
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+".\Core\Src\cat1.c", line 143: Error:  #20: identifier "csq" is undefined
+          printf("信号强度:%s\r\n", csq);                                      //串口显示信息
+                                ^
+.\Core\Src\cat1.c: 0 warnings, 1 error
+
+[2022-02-06 13:46:21]	[done]
+	build successfully !
+
+[2022-02-06 13:47:14]	[done]
+	build successfully !
+
+[2022-02-06 13:47:31]	compilation failed at : "f:\LIJING\OLED-1\Core\Src\cat1.c", exit code: 1
+  at unify_builder.Program.compileByMulThread (System.Int32 thrNum, unify_builder.CmdGenerator+CmdInfo[] cmds, System.Collections.Generic.List`1[T] errLogs) [0x00104] in <67d11e1b30504dd6babd321425698ba1>:0 
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+".\Core\Src\cat1.c", line 145: Error:  #167: argument of type "char (*)[20]" is incompatible with parameter of type "unsigned char *"
+          OLED_ShowString(0, 42, &csq);
+                                 ^
+.\Core\Src\cat1.c: 0 warnings, 1 error
+
+[2022-02-06 13:47:59]	[done]
+	build successfully !
+
+[2022-02-06 13:49:11]	[done]
+	build successfully !
+

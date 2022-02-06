@@ -116,7 +116,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    HAL_Delay(200);
+    HAL_Delay(1200);
     AHT10_Data(&temp, &humi);        //比较校验值，成功，进入if
     printf("�¶�:%.2f��    ", temp);   //串口输出数据
     printf("ʪ��:%.2f%%\r\n", humi); //串口输出数据
@@ -127,6 +127,8 @@ int main(void)
     CAT1_Reset(30);
     HAL_Delay(1000);
     CAT1_ExitTrans(30);
+    HAL_Delay(1000);
+    CAT1_CSQ(30);
     //memset(u3_rxbuffer, 0x00, 1024);
     
     HAL_Delay(1000);
