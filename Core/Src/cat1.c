@@ -174,6 +174,6 @@ char CAT1_SYSINFO(int timeout)
             sscanf(u3_rxbuffer, "%[^:]:%[^,],%[^\r]", temp, temp, info);
             printf("当前网络形式:%d\r\n", info);
         }
-        return 0;
     }
+    return 0;
 }
