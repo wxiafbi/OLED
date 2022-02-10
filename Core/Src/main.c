@@ -132,6 +132,7 @@ int main(void)
     HAL_Delay(1000);
     CAT1_SYSINFO(30);
     HAL_Delay(1000);
+    CAT1_LBSN(30);
   }
   /* USER CODE END 3 */
 }
