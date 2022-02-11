@@ -2,6 +2,7 @@
 #include "usart.h"
 #include <string.h>
 #include "oled.h"
+#include "mqtt.h"
 /*-------------------------------------------------*/
 /*函数名：复位4G模块                               */
 /*参  数：timeout： 超时时间（1s的倍数）           */
@@ -136,7 +137,7 @@ char CAT1_CSQ(int timeout)
         if (strstr(u3_rxbuffer, ",")) //如果接收到,表示指令成功
             break;                    //主动跳出while循环
         printf("%d ", timeout);       //串口输出现在的超时时间
-                                      // Delay_Ms(100);
+                                      // HAL_DEMAY(100);
     }
     printf("\r\n"); //串口输出信息
     if (timeout <= 0)
@@ -177,13 +178,13 @@ char CAT1_SYSINFO(int timeout)
     else
     {
         sscanf(u3_rxbuffer, "%[^:]:%[^,],%[^\r]", temp, temp, info); //拆分数据
-        for (size_t i = 0; i <100; i++)
+        for (size_t i = 0; i < 100; i++)
         {
             /* code */
-            printf("%c",u3_rxbuffer[i]);
+            printf("%c", u3_rxbuffer[i]);
         }
-        
-        printf("当前网络形式:%s\r\n", info);                         //串口显示信息
+
+        printf("当前网络形式:%s\r\n", info); //串口显示信息
     }
     return 0; //正确 返回0
 }
@@ -208,14 +209,14 @@ char CAT1_LBSN(int timeout)
         return 1; //如果timeout<=0，说明超时时间到了，也没能收到,返回1
     else
     {
-        sscanf(u3_rxbuffer, "%[^:]:%[^\r]", temp,info); //拆分数据
-        for (size_t i = 0; i <100; i++)
+        sscanf(u3_rxbuffer, "%[^:]:%[^\r]", temp, info); //拆分数据
+        for (size_t i = 0; i < 100; i++)
         {
             /* code */
-            printf("%c",u3_rxbuffer[i]);
+            printf("%c", u3_rxbuffer[i]);
         }
-        
-        printf("当前网络形式:%s\r\n", info);                         //串口显示信息
+
+        printf("当前网络形式:%s\r\n", info); //串口显示信息
     }
     return 0; //正确 返回0
 }
@@ -224,104 +225,104 @@ char CAT1_LBSN(int timeout)
 /*参  数：timeout： 超时时间（100ms的倍数）        */
 /*返回值：0：正确   其他：错误                     */
 /*-------------------------------------------------*/
-// char CAT1_Connect_IoTServer(int timeout)
-// {
-//     char temp[256];
+char CAT1_Connect_IoTServer(int timeout)
+{
+    char temp[256];
 
-//     u1_printf("准备复位模块\r\n"); //串口提示数据
-//     if (CAT1_Reset(20))
-//     {                                        //复位，1s超时单位，总计20s超时时间
-//         u1_printf("复位失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 1;                            //返回1
-//     }
-//     else
-//         u1_printf("复位成功\r\n"); //串口提示数据
+    printf("准备复位模块\r\n"); //串口提示数据
+    if (CAT1_Reset(20))
+    {                                     //复位，1s超时单位，总计20s超时时间
+        printf("复位失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 1;                         //返回1
+    }
+    else
+        printf("复位成功\r\n"); //串口提示数据
 
-//     u1_printf("准备退出透传\r\n"); //串口提示数据
-//     if (CAT1_ExitTrans(50))
-//     {                                            //退出透传，100ms超时单位，总计5s超时时间
-//         u1_printf("退出透传失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 2;                                //返回2
-//     }
-//     else
-//         u1_printf("退出透传成功\r\n"); //串口提示数据
+    printf("准备退出透传\r\n"); //串口提示数据
+    if (CAT1_ExitTrans(50))
+    {                                         //退出透传，100ms超时单位，总计5s超时时间
+        printf("退出透传失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 2;                             //返回2
+    }
+    else
+        printf("退出透传成功\r\n"); //串口提示数据
 
-//     u1_printf("准备设置NET模式\r\n"); //串口提示数据
-//     if (CAT1_SendCmd("AT+WKMOD=NET", 50))
-//     {                                               //设置NET模式，100ms超时单位，总计5s超时时间
-//         u1_printf("设置NET模式失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 5;                                   //返回5
-//     }
-//     else
-//         u1_printf("设置NET模式成功\r\n"); //串口提示数据
+    printf("准备设置NET模式\r\n"); //串口提示数据
+    if (CAT1_SendCmd("AT+WKMOD=NET", 50))
+    {                                            //设置NET模式，100ms超时单位，总计5s超时时间
+        printf("设置NET模式失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 5;                                //返回5
+    }
+    else
+        printf("设置NET模式成功\r\n"); //串口提示数据
 
-//     u1_printf("准备使能链接A\r\n"); //串口提示数据
-//     if (CAT1_SendCmd("AT+SOCKAEN=ON", 50))
-//     {                                             //使能链接A，100ms超时单位，总计5s超时时间
-//         u1_printf("使能链接A失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 6;                                 //返回6
-//     }
-//     else
-//         u1_printf("使能链接A成功\r\n"); //串口提示数据
+    printf("准备使能链接A\r\n"); //串口提示数据
+    if (CAT1_SendCmd("AT+SOCKAEN=ON", 50))
+    {                                          //使能链接A，100ms超时单位，总计5s超时时间
+        printf("使能链接A失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 6;                              //返回6
+    }
+    else
+        printf("使能链接A成功\r\n"); //串口提示数据
 
-//     u1_printf("准备关闭链接B\r\n"); //串口提示数据
-//     if (CAT1_SendCmd("AT+SOCKBEN=OFF", 50))
-//     {                                             //关闭链接B，100ms超时单位，总计5s超时时间
-//         u1_printf("关闭链接B失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 7;                                 //返回7
-//     }
-//     else
-//         u1_printf("关闭链接B成功\r\n"); //串口提示数据
+    printf("准备关闭链接B\r\n"); //串口提示数据
+    if (CAT1_SendCmd("AT+SOCKBEN=OFF", 50))
+    {                                          //关闭链接B，100ms超时单位，总计5s超时时间
+        printf("关闭链接B失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 7;                              //返回7
+    }
+    else
+        printf("关闭链接B成功\r\n"); //串口提示数据
 
-//     u1_printf("准备设置链接A长连接\r\n"); //串口提示数据
-//     if (CAT1_SendCmd("AT+SOCKASL=LONG", 50))
-//     {                                                   //设置链接A长连接，100ms超时单位，总计5s超时时间
-//         u1_printf("设置链接A长连接失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 8;                                       //返回8
-//     }
-//     else
-//         u1_printf("设置链接A长连接成功\r\n"); //串口提示数据
+    printf("准备设置链接A长连接\r\n"); //串口提示数据
+    if (CAT1_SendCmd("AT+SOCKASL=LONG", 50))
+    {                                                //设置链接A长连接，100ms超时单位，总计5s超时时间
+        printf("设置链接A长连接失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 8;                                    //返回8
+    }
+    else
+        printf("设置链接A长连接成功\r\n"); //串口提示数据
 
-//     u1_printf("准备关闭自带心跳功能\r\n"); //串口提示数据
-//     if (CAT1_SendCmd("AT+HEARTEN=OFF", 50))
-//     {                                                    //关闭自带心跳功能，100ms超时单位，总计5s超时时间
-//         u1_printf("关闭自带心跳功能失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 9;                                        //返回9
-//     }
-//     else
-//         u1_printf("关闭自带心跳功能成功\r\n"); //串口提示数据
+    printf("准备关闭自带心跳功能\r\n"); //串口提示数据
+    if (CAT1_SendCmd("AT+HEARTEN=OFF", 50))
+    {                                                 //关闭自带心跳功能，100ms超时单位，总计5s超时时间
+        printf("关闭自带心跳功能失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 9;                                     //返回9
+    }
+    else
+        printf("关闭自带心跳功能成功\r\n"); //串口提示数据
 
-//     u1_printf("准备设置链接A链接服务器\r\n");                  //串口提示数据
-//     sprintf(temp, "AT+SOCKA=TCP,%s,%d", ServerIP, ServerPort); //构建命令
-//     if (CAT1_SendCmd(temp, 50))
-//     {                                                       //设置链接A链接服务器，100ms超时单位，总计5s超时时间
-//         u1_printf("设置链接A链接服务器失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 10;                                          //返回10
-//     }
-//     else
-//         u1_printf("设置链接A链接服务器成功\r\n"); //串口提示数据
+    printf("准备设置链接A链接服务器\r\n");                     //串口提示数据
+    sprintf(temp, "AT+SOCKA=TCP,%s,%d", ServerIP, ServerPort); //构建命令
+    if (CAT1_SendCmd(temp, 50))
+    {                                                    //设置链接A链接服务器，100ms超时单位，总计5s超时时间
+        printf("设置链接A链接服务器失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 10;                                       //返回10
+    }
+    else
+        printf("设置链接A链接服务器成功\r\n"); //串口提示数据
 
-//     u1_printf("保存设置，然后重启模块\r\n"); //串口提示数据
-//     if (CAT1_SendCmd("AT+S", 50))
-//     {                                            //保存设置，然后重启模块，100ms超时单位，总计5s超时时间
-//         u1_printf("保存设置失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
-//         return 11;                               //返回11
-//     }
-//     else
-//         u1_printf("保存设置成功\r\n"); //串口提示数据
+    printf("保存设置，然后重启模块\r\n"); //串口提示数据
+    if (CAT1_SendCmd("AT+S", 50))
+    {                                         //保存设置，然后重启模块，100ms超时单位，总计5s超时时间
+        printf("保存设置失败，准备重启\r\n"); //返回非0值，进入if，串口提示数据
+        return 11;                            //返回11
+    }
+    else
+        printf("保存设置成功\r\n"); //串口提示数据
 
-//     u1_printf("等待重启并连接服务器\r\n"); //串口提示数据
-//     while (timeout--)
-//     {                              //等待超时时间到0
-//         Delay_Ms(1000);            //延时1s
-//         if (LINKA_STA == 0)        //如LINKA_STA PC1是低电平了，表示连接成功
-//             break;                 //跳出while循环
-//         u1_printf("%d ", timeout); //串口输出现在的超时时间
-//     }
-//     u1_printf("\r\n"); //串口输出信息
-//     if (timeout <= 0)
-//         return 12; //超时错误，返回12
+    printf("等待重启并连接服务器\r\n"); //串口提示数据
+    while (timeout--)
+    {                                                              //等待超时时间到0
+        HAL_Delay(1000);                                           //延时1s
+        if (HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_0) == GPIO_PIN_RESET) //如LINKA_STA PC1是低电平了，表示连接成功
+            break;                                                 //跳出while循环
+        printf("%d ", timeout);                                    //串口输出现在的超时时间
+    }
+    printf("\r\n"); //串口输出信息
+    if (timeout <= 0)
+        return 12; //超时错误，返回12
 
-//     Delay_Ms(500); //延时
-//     return 0;      //正确返回0
-// }
+    HAL_Delay(500); //延时
+    return 0;       //正确返回0
+}
