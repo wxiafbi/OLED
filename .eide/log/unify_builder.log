@@ -702,3 +702,15 @@ Finished: 1 information, 0 warning and 1 error messages.
 [2022-02-11 10:24:28]	[done]
 	build successfully !
 
+[2022-02-11 14:36:06]	link failed !, exit code: 1
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+Error: L6218E: Undefined symbol Delay_Ms (referred from cat1.o).
+Error: L6218E: Undefined symbol u1_printf (referred from cat1.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 2 error messages.
+
+
+[2022-02-11 14:37:38]	[done]
+	build successfully !
+
