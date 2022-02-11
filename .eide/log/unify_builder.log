@@ -671,3 +671,34 @@ Finished: 1 information, 0 warning and 2 error messages.
 [2022-02-10 16:35:55]	[done]
 	build successfully !
 
+[2022-02-11 10:13:51]	link failed !, exit code: 1
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+Error: L6218E: Undefined symbol LED_State (referred from mqtt.o).
+Error: L6218E: Undefined symbol u1_printf (referred from mqtt.o).
+Error: L6218E: Undefined symbol utils_hmac_sha1 (referred from mqtt.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 3 error messages.
+
+
+[2022-02-11 10:16:16]	link failed !, exit code: 1
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+Error: L6218E: Undefined symbol LED_State (referred from mqtt.o).
+Error: L6218E: Undefined symbol u1_printf (referred from mqtt.o).
+Error: L6218E: Undefined symbol utils_hmac_sha1 (referred from mqtt.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 3 error messages.
+
+
+[2022-02-11 10:23:59]	link failed !, exit code: 1
+  at unify_builder.Program.Main (System.String[] args) [0x01a1e] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+Error: L6218E: Undefined symbol LED_State (referred from mqtt.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+
+
+[2022-02-11 10:24:28]	[done]
+	build successfully !
+
