@@ -29,6 +29,7 @@
 #include "oled.h"
 #include "cat1.h"
 #include <string.h>
+#include "mqtt.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -107,6 +108,7 @@ int main(void)
   }
   else
     printf("AHT10初始化成功\r\n\r\n"); //涓插彛杈撳嚭鏁版嵁
+  IoT_Parameter_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
