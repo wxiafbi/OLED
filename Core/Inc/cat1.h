@@ -47,6 +47,7 @@ char CAT1_SendCmd(char *cmd, int timeout);
 char CAT1_CSQ(int timeout);
 char CAT1_SYSINFO(int timeout);
 char CAT1_LBSN(int timeout);
+char CAT1_Connect_IoTServer(int timeout);
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus

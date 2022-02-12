@@ -97,10 +97,15 @@ char CAT1_ExitTrans(int timeout)
 /*-------------------------------------------------*/
 char CAT1_SendCmd(char *cmd, int timeout)
 {
+    char temp[512];
     u3_count = 0;                         // CAT1接收数据量变量清零
     memset(u3_rxbuffer, 0x00, u3_rxsize); //清空CAT1接收缓冲区
     // CAT1_printf("%s\r\n",cmd);                  //发送指令
-    HAL_UART_Transmit(&huart3, (uint8_t *)cmd, sizeof(cmd), 0xfff);
+    memcpy(&temp[0], cmd, strlen(cmd));
+    temp[strlen(cmd)] = 0x0d;
+    temp[strlen(cmd) + 1] = 0x0a;
+
+    HAL_UART_Transmit(&huart3, (uint8_t *)temp, strlen(cmd)+2, 0xfff);
     while (timeout--)
     {                                  //等待超时时间到0
         HAL_Delay(100);                //延时100ms

@@ -124,15 +124,17 @@ int main(void)
     OLED_display_pic();  //显示图片
     HAL_Delay(1000);     //延时1�?
     OLED_display_info(); //显示信息
-    CAT1_Reset(30);
-    HAL_Delay(1000);
-    CAT1_ExitTrans(30);
-    HAL_Delay(1000);
-    CAT1_CSQ(30);
-    HAL_Delay(1000);
-    CAT1_SYSINFO(30);
-    HAL_Delay(1000);
-    CAT1_LBSN(30);
+    // CAT1_Reset(30);
+    // HAL_Delay(1000);
+    // CAT1_ExitTrans(30);
+    // HAL_Delay(1000);
+    // CAT1_CSQ(30);
+    // HAL_Delay(1000);
+    // CAT1_SYSINFO(30);
+    // HAL_Delay(1000);
+    // CAT1_LBSN(30);
+    // HAL_Delay(1000);
+    CAT1_Connect_IoTServer(30);
   }
   /* USER CODE END 3 */
 }

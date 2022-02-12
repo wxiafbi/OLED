@@ -714,3 +714,51 @@ Finished: 1 information, 0 warning and 2 error messages.
 [2022-02-11 14:37:38]	[done]
 	build successfully !
 
+[2022-02-12 08:52:20]	[done]
+	build successfully !
+
+[2022-02-12 08:53:06]	[done]
+	build successfully !
+
+[2022-02-12 08:55:09]	[done]
+	build successfully !
+
+[2022-02-12 09:36:30]	[done]
+	build successfully !
+
+[2022-02-12 09:37:55]	[done]
+	build successfully !
+
+[2022-02-12 11:49:15]	[done]
+	build successfully !
+
+[2022-02-12 11:52:31]	compilation failed at : "f:\LIJING\OLED-1\Core\Src\cat1.c", exit code: 1
+  at unify_builder.Program.compileByMulThread (System.Int32 thrNum, unify_builder.CmdGenerator+CmdInfo[] cmds, System.Collections.Generic.List`1[T] errLogs) [0x00104] in <67d11e1b30504dd6babd321425698ba1>:0 
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+".\Core\Src\cat1.c", line 105: Error:  #513: a value of type "char *" cannot be assigned to an entity of type "char"
+      temp[strlen(cmd)] = "\r";
+                        ^
+".\Core\Src\cat1.c", line 106: Error:  #513: a value of type "char *" cannot be assigned to an entity of type "char"
+      temp[strlen(cmd) + 1] = "\n";
+                            ^
+.\Core\Src\cat1.c: 0 warnings, 2 errors
+
+[2022-02-12 12:49:36]	compilation failed at : "f:\LIJING\OLED-1\Core\Src\cat1.c", exit code: 1
+  at unify_builder.Program.compileByMulThread (System.Int32 thrNum, unify_builder.CmdGenerator+CmdInfo[] cmds, System.Collections.Generic.List`1[T] errLogs) [0x00104] in <67d11e1b30504dd6babd321425698ba1>:0 
+  at unify_builder.Program.Main (System.String[] args) [0x018f4] in <67d11e1b30504dd6babd321425698ba1>:0 
+---
+".\Core\Src\cat1.c", line 106: Error:  #513: a value of type "char *" cannot be assigned to an entity of type "char"
+      temp[strlen(cmd) + 1] = "0x0a";
+                            ^
+.\Core\Src\cat1.c: 0 warnings, 1 error
+
+[2022-02-12 12:49:53]	[done]
+	build successfully !
+
+[2022-02-12 14:33:38]	[done]
+	build successfully !
+
+[2022-02-12 14:40:40]	[done]
+	build successfully !
+
